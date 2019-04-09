@@ -37,7 +37,7 @@ func checkBalanceTask(requestsCount, timeout *uint64, token *string, reportCh ch
 	var i uint64
 	for i = 0; i < *requestsCount; i++ {
 		url := fmt.Sprintf("%s/%s", *baseUrlAndContext, BalanceUri)
-		respBody, _ := bag.Get(url, token)
+		_, respBody, _ := bag.Get(url, token)
 		var restObj interface{}
 		json.Unmarshal(respBody, &restObj)
 		amountStr := restObj.(map[string]interface{})["response"].(map[string]interface{})["amount"].(float64)
@@ -56,7 +56,7 @@ func main() {
 	bodyStr = strings.ReplaceAll(bodyStr, "\n", "")
 	fmt.Println("BODY:> ", bodyStr)
 
-	respBody, _ := bag.Post(url, bodyStr, nil)
+	_, respBody, _ := bag.Post(url, bodyStr, nil)
 
 	var restObj interface{}
 	json.Unmarshal(respBody, &restObj)
