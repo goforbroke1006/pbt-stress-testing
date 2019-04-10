@@ -10,7 +10,7 @@ import (
 )
 
 var client = http.Client{
-	Timeout: 5 * time.Second,
+	Timeout: 10 * time.Second,
 }
 
 func Get(url string, token *string) (int, []byte, error) {
